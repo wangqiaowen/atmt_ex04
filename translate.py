@@ -19,8 +19,8 @@ def get_args():
     parser.add_argument('--seed', default=42, type=int, help='pseudo random number generator seed')
 
     # Add data arguments
-    parser.add_argument('--data', default='data_asg4/prepared_data', help='path to data directory')
-    parser.add_argument('--checkpoint-path', default='checkpoints_asg4/checkpoint_best.pt', help='path to the model file')
+    parser.add_argument('--data', default='/Users/wangqiaowen/atmt/data_asg4/prepared_data', help='path to data directory')
+    parser.add_argument('--checkpoint-path', default='/Users/wangqiaowen/atmt/checkpoints_asg4/checkpoint_best.pt', help='path to the model file')
     parser.add_argument('--batch-size', default=None, type=int, help='maximum number of sentences in a batch')
     parser.add_argument('--output', default='model_translations.txt', type=str,
                         help='path to the output file destination')

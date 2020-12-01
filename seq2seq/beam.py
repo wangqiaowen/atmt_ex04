@@ -2,6 +2,7 @@ import torch
 
 from itertools import count
 from queue import PriorityQueue
+import numpy as np
 
 
 class BeamSearch(object):
@@ -53,6 +54,28 @@ class BeamSearch(object):
         node = (node[0], node[2])
 
         return node
+
+    # For task 4 diversity promoting beam search.
+    # To output the n-best lists
+    def get_top_n(self,beam_size):
+        """ Returns final node with the lowest negative log probability """
+        # Merge EOS paths and those that were stopped by
+        # max sequence length (still in nodes)
+        merged = PriorityQueue()
+        nodes = []
+        for _ in range(self.final.qsize()):
+            node = self.final.get()
+            merged.put(node)
+
+        for _ in range(self.nodes.qsize()):
+            node = self.nodes.get()
+            merged.put(node)
+
+        for i in range(merged.qsize()):
+            node = merged.get()
+            nodes.append([node[0], node[2]])
+
+        return nodes
 
     def prune(self):
         """ Removes all nodes but the beam_size best ones (lowest neg log prob) """
